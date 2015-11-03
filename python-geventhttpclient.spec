@@ -36,16 +36,16 @@ Requires:	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A high performance, concurrent HTTP client library for python using
+A high performance, concurrent HTTP client library for Python using
 gevent.
 
-geventhttpclient use a fast http parser, written in C, originating
+geventhttpclient use a fast HTTP parser, written in C, originating
 from nginx, extracted and modified by Joyent.
 
 geventhttpclient has been specifically designed for high concurrency,
 streaming and support HTTP 1.1 persistent connections. More generally
 it is designed for efficiently pulling from REST APIs and streaming
-API’s like Twitter’s.
+API's like Twitter's.
 
 Safe SSL support is provided by default.
 
@@ -55,16 +55,16 @@ Group:		Libraries/Python
 Requires:	python3-modules
 
 %description -n python3-%{module}
-A high performance, concurrent HTTP client library for python using
+A high performance, concurrent HTTP client library for Python using
 gevent.
 
-geventhttpclient use a fast http parser, written in C, originating
+geventhttpclient use a fast HTTP parser, written in C, originating
 from nginx, extracted and modified by Joyent.
 
 geventhttpclient has been specifically designed for high concurrency,
 streaming and support HTTP 1.1 persistent connections. More generally
 it is designed for efficiently pulling from REST APIs and streaming
-API’s like Twitter’s.
+API's like Twitter's.
 
 Safe SSL support is provided by default.
 
