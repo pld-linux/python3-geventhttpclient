@@ -15,6 +15,7 @@ Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/source/g/geventhttpclient/geventhttpclient-%{version}.tar.gz
 # Source0-md5:	1b3070e09b6e50fce929771f3f4fc9a6
 URL:		https://pypi.python.org/pypi/geventhttpclient
+BuildRequires:	python-gevent
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.612
 %if %{with python2}
