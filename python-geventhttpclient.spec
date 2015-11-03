@@ -72,11 +72,6 @@ Safe SSL support is provided by default.
 %prep
 %setup -q -n %{module}-%{version}
 
-# setup copy of source in py3 dir
-set -- *
-install -d py3
-cp -a "$@" py3
-
 %build
 %if %{with python2}
 CC="%{__cc}" \
@@ -120,9 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/geventhttpclient
 %{py_sitedir}/geventhttpclient/*.py[co]
 %attr(755,root,root) %{py_sitedir}/geventhttpclient/*.so
-%if "%{py_ver}" > "2.4"
 %{py_sitedir}/%{module}-%{version}-py*.egg-info
-%endif
 %endif
 
 %if %{with python3}
