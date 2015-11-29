@@ -17,7 +17,7 @@ Source0:	https://pypi.python.org/packages/source/g/geventhttpclient/geventhttpcl
 URL:		https://pypi.python.org/pypi/geventhttpclient
 BuildRequires:	python-gevent
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.612
+BuildRequires:	rpmbuild(macros) >= 1.710
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-setuptools
