@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	tests	# py.test tests
+%bcond_with	tests	# py.test tests [use network]
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
