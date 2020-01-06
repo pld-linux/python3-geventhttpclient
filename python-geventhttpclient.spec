@@ -12,10 +12,10 @@ Version:	1.3.1
 Release:	3
 License:	MIT
 Group:		Libraries/Python
-#Source0Download: https://pypi.python.org/simple/geventhttpclient
+#Source0Download: https://pypi.org/simple/geventhttpclient/
 Source0:	https://files.pythonhosted.org/packages/source/g/geventhttpclient/geventhttpclient-%{version}.tar.gz
 # Source0-md5:	9aaac96fa4856ac919869a261c8b3dcb
-URL:		https://pypi.python.org/pypi/geventhttpclient
+URL:		https://pypi.org/project/geventhttpclient/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with python2}
