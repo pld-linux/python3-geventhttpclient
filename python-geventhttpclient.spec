@@ -9,7 +9,7 @@ Summary:	A high performance, concurrent HTTP client library
 Summary(pl.UTF-8):	Biblioteka bardzo wydajnego, wielowątkowego klienta HTTP
 Name:		python-%{module}
 Version:	1.3.1
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/geventhttpclient/
