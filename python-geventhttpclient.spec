@@ -8,13 +8,13 @@
 Summary:	A high performance, concurrent HTTP client library
 Summary(pl.UTF-8):	Biblioteka bardzo wydajnego, wielowątkowego klienta HTTP
 Name:		python-%{module}
-Version:	1.3.1
-Release:	5
+Version:	1.5.3
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/geventhttpclient/
 Source0:	https://files.pythonhosted.org/packages/source/g/geventhttpclient/geventhttpclient-%{version}.tar.gz
-# Source0-md5:	9aaac96fa4856ac919869a261c8b3dcb
+# Source0-md5:	791ce820ce5c73bac45c2d79c3d0aaf8
 URL:		https://pypi.org/project/geventhttpclient/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -24,7 +24,9 @@ BuildRequires:	python-devel >= 1:2.7.9
 BuildRequires:	python-modules >= 1:2.7.9
 BuildRequires:	python-setuptools
 %if %{with tests}
+BuildRequires:	python-brotli
 BuildRequires:	python-certifi
+BuildRequires:	python-dpkt
 BuildRequires:	python-gevent >= 0.13
 BuildRequires:	python-pytest
 BuildRequires:	python-six
@@ -35,7 +37,9 @@ BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	python3-modules >= 1:3.4
 BuildRequires:	python3-setuptools
 %if %{with tests}
+BuildRequires:	python3-brotli
 BuildRequires:	python3-certifi
+BuildRequires:	python3-dpkt
 BuildRequires:	python3-gevent >= 0.13
 BuildRequires:	python3-pytest
 BuildRequires:	python3-six
@@ -109,20 +113,27 @@ Domyślnie dostępna jest obsługa bezpiecznego SSL.
 %prep
 %setup -q -n %{module}-%{version}
 
-%{__rm} -r src/geventhttpclient/tests/__pycache__ \
-	src/geventhttpclient.egg-info
+%{__rm} -r src/geventhttpclient.egg-info
 
 %build
 %if %{with python2}
 %py_build
 
-%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-2/lib.*) %{__python} -m pytest src}
+%if %{with tests}
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTHONPATH=$(pwd)/$(echo build-2/lib.*) \
+%{__python} -m pytest src
+%endif
 %endif
 
 %if %{with python3}
 %py3_build
 
-%{?with_tests:PYTHONPATH=$(pwd)/$(echo build-3/lib.*) %{__python3} -m pytest src}
+%if %{with tests}
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTHONPATH=$(pwd)/$(echo build-3/lib.*) \
+%{__python3} -m pytest src
+%endif
 %endif
 
 %install
@@ -132,13 +143,10 @@ rm -rf $RPM_BUILD_ROOT
 %py_install
 
 %py_postclean
-%{__rm} -r $RPM_BUILD_ROOT%{py_sitedir}/geventhttpclient/tests
 %endif
 
 %if %{with python3}
 %py3_install
-
-%{__rm} -r $RPM_BUILD_ROOT%{py3_sitedir}/geventhttpclient/tests
 %endif
 
 %clean
@@ -147,6 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
+%doc LICENSE-MIT README.mdown
 %dir %{py_sitedir}/geventhttpclient
 %{py_sitedir}/geventhttpclient/*.py[co]
 %attr(755,root,root) %{py_sitedir}/geventhttpclient/_parser.so
@@ -156,6 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
+%doc LICENSE-MIT README.mdown
 %dir %{py3_sitedir}/geventhttpclient
 %{py3_sitedir}/geventhttpclient/*.py
 %{py3_sitedir}/geventhttpclient/__pycache__
