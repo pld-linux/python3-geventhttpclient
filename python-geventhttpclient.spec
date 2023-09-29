@@ -8,13 +8,14 @@
 Summary:	A high performance, concurrent HTTP client library
 Summary(pl.UTF-8):	Biblioteka bardzo wydajnego, wielowątkowego klienta HTTP
 Name:		python-%{module}
-Version:	1.5.3
-Release:	5
+# keep 1.x here for python2 support
+Version:	1.5.5
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/geventhttpclient/
 Source0:	https://files.pythonhosted.org/packages/source/g/geventhttpclient/geventhttpclient-%{version}.tar.gz
-# Source0-md5:	791ce820ce5c73bac45c2d79c3d0aaf8
+# Source0-md5:	921c99dae79636616b4826423a870c9a
 URL:		https://pypi.org/project/geventhttpclient/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -155,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc LICENSE-MIT README.mdown
+%doc LICENSE.txt README.mdown
 %dir %{py_sitedir}/geventhttpclient
 %{py_sitedir}/geventhttpclient/*.py[co]
 %attr(755,root,root) %{py_sitedir}/geventhttpclient/_parser.so
@@ -165,7 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc LICENSE-MIT README.mdown
+%doc LICENSE.txt README.mdown
 %dir %{py3_sitedir}/geventhttpclient
 %{py3_sitedir}/geventhttpclient/*.py
 %{py3_sitedir}/geventhttpclient/__pycache__
