@@ -1,23 +1,21 @@
 #
 # Conditional build:
-%bcond_with	tests	# py.test tests [use network]
+%bcond_with	tests	# py.test tests [use network, missing tests.common file in sdist]
 
 %define 	module	geventhttpclient
 Summary:	A high performance, concurrent HTTP client library
 Summary(pl.UTF-8):	Biblioteka bardzo wydajnego, wielowątkowego klienta HTTP
 Name:		python3-%{module}
-Version:	2.3.3
+Version:	2.3.4
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/geventhttpclient/
 Source0:	https://files.pythonhosted.org/packages/source/g/geventhttpclient/geventhttpclient-%{version}.tar.gz
-# Source0-md5:	ec29adc387f88926d4419d3873dbe4b6
+# Source0-md5:	34d06a7fadb54de4aeac889c44643a29
 URL:		https://pypi.org/project/geventhttpclient/
-BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.714
-BuildRequires:	python3-devel >= 1:3.4
-BuildRequires:	python3-modules >= 1:3.4
+BuildRequires:	python3-devel >= 1:3.9
+BuildRequires:	python3-modules >= 1:3.9
 BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-brotli
@@ -25,9 +23,12 @@ BuildRequires:	python3-certifi
 BuildRequires:	python3-dpkt
 BuildRequires:	python3-gevent >= 0.13
 BuildRequires:	python3-pytest
-BuildRequires:	python3-six
+BuildRequires:	python3-requests
+BuildRequires:	python3-urllib3
 %endif
-Requires:	python3-modules >= 1:3.7
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.714
+Requires:	python3-modules >= 1:3.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +70,7 @@ Domyślnie dostępna jest obsługa bezpiecznego SSL.
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTHONPATH=$(pwd)/$(echo build-3/lib.*) \
-%{__python3} -m pytest src
+%{__python3} -m pytest tests
 %endif
 
 %install
